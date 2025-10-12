@@ -180,9 +180,20 @@ export default function Dashboard() {
             {/* Modal Header */}
             <div className="border-b border-border px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <h2 className="text-xl font-semibold text-foreground">
-                  {currentNote.id ? 'Edit Note' : 'New Note'}
-                </h2>
+                <div className="flex items-center gap-4">
+                  <h2 className="text-xl font-semibold text-foreground">
+                    {currentNote.id ? 'Edit Note' : 'New Note'}
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => setShowMarkdownGuide(true)}
+                    className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
+                    title="Markdown Guide"
+                  >
+                    <FiBook size={16} />
+                    <span className="hidden sm:inline">Guide</span>
+                  </button>
+                </div>
                 {/* Mobile Tab Controls */}
                 <div className="flex md:hidden bg-muted rounded-lg p-1">
                   <button
@@ -342,6 +353,12 @@ Switch to Preview tab to see results 🚀"
           </div>
         </div>
       )}
+      
+      {/* Markdown Guide Modal */}
+      <MarkdownGuide 
+        isOpen={showMarkdownGuide} 
+        onClose={() => setShowMarkdownGuide(false)} 
+      />
     </>
   );
 }
