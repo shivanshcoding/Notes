@@ -13,9 +13,13 @@
 </div>
 
 > **A next-generation note-taking application with real-time markdown rendering, mathematical equation support, and a futuristic glass-morphism UI designed for best notes making and technical documentation.**
+---
 
-FrontEnd Deployed : https://modern-notes-app-re48.onrender.com
-BackEnd Deployed : https://modern-notes.onrender.com
+## 🌐 Deployed Links
+
+**Frontend:** [Modern Notes App](https://modern-notes-app-re48.onrender.com)  || **Backend:** [API Server](https://modern-notes.onrender.com)
+
+---
 
 ## 🌟 **Live Demo**
 
