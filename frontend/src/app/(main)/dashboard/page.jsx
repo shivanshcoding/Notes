@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
+import MarkdownGuide from '@/components/MarkdownGuide';
 import NoteCard from '@/components/NoteCard';
 import { IoMdAdd, IoMdClose } from 'react-icons/io';
-import { FiEdit, FiEye } from 'react-icons/fi';
+import { FiEdit, FiEye, FiBook } from 'react-icons/fi';
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -17,6 +17,7 @@ export default function Dashboard() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('write'); // For mobile: 'write' or 'preview'
   const [isLoading, setIsLoading] = useState(true);
+  const [showMarkdownGuide, setShowMarkdownGuide] = useState(false);
 
   const fetchNotes = async () => {
     if (!session?.accessToken) return;
@@ -175,7 +176,7 @@ export default function Dashboard() {
       {/* Sophisticated Markdown Editor Modal */}
       {isEditorOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-animate flex items-center justify-center p-4 z-50 animate-slide-in-up">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-7xl h-[85vh] shadow-2xl overflow-hidden animate-slide-in-up">
+          <div className="bg-card border border-border rounded-2xl w-full max-w-7xl max-h-[90vh] h-full shadow-2xl overflow-hidden animate-slide-in-up flex flex-col">
             {/* Modal Header */}
             <div className="border-b border-border px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -219,7 +220,7 @@ export default function Dashboard() {
               </button>
             </div>
 
-            <form onSubmit={handleSaveNote} className="h-full flex flex-col">
+            <form onSubmit={handleSaveNote} className="flex-1 flex flex-col min-h-0">
               {/* Title Input */}
               <div className="px-6 py-4 border-b border-border">
                 <input
@@ -245,7 +246,31 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <textarea
-                      placeholder="Start writing your note... (Markdown supported)"
+                      placeholder={`# Welcome to Modern Notes ✨
+
+Try these markdown features:
+
+## Code Blocks
+\`\`\`javascript
+const hello = "world";
+console.log(hello);
+\`\`\`
+
+## Math Equations
+$E = mc^2$ or $$\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$$
+
+## Tables
+| Feature | Supported |
+|---------|----------|
+| Tables  | ✅ |
+| Math    | ✅ |
+| Code    | ✅ |
+
+## Task Lists
+- [x] Enhanced markdown
+- [ ] Your next task
+
+> **Tip**: See the live preview on the right! 🚀`}
                       value={currentNote.content}
                       onChange={(e) => setCurrentNote({ ...currentNote, content: e.target.value })}
                       className="flex-1 w-full p-6 bg-transparent border-none focus:outline-none placeholder:text-muted-foreground resize-none font-mono text-sm leading-relaxed"
@@ -261,20 +286,7 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <div className="flex-1 p-6 overflow-auto">
-                      {currentNote.content ? (
-                        <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-muted prose-pre:border">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {currentNote.content}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-center h-full text-muted-foreground">
-                          <div className="text-center">
-                            <FiEye size={32} className="mx-auto mb-2 opacity-50" />
-                            <p>Preview will appear here</p>
-                          </div>
-                        </div>
-                      )}
+                      <MarkdownRenderer content={currentNote.content} />
                     </div>
                   </div>
                 </div>
@@ -283,27 +295,22 @@ export default function Dashboard() {
                 <div className="md:hidden w-full flex flex-col">
                   {activeTab === 'write' ? (
                     <textarea
-                      placeholder="Start writing your note... (Markdown supported)"
+                      placeholder="# Your Note Title
+
+Start writing... Supports:
+- **Bold** and *italic* text
+- `code` and code blocks
+- Math equations: $x^2$
+- Tables, lists, and more!
+
+Switch to Preview tab to see results 🚀"
                       value={currentNote.content}
                       onChange={(e) => setCurrentNote({ ...currentNote, content: e.target.value })}
                       className="flex-1 w-full p-6 bg-transparent border-none focus:outline-none placeholder:text-muted-foreground resize-none font-mono text-sm leading-relaxed"
                     />
                   ) : (
                     <div className="flex-1 p-6 overflow-auto">
-                      {currentNote.content ? (
-                        <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-pre:bg-muted prose-pre:border">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {currentNote.content}
-                          </ReactMarkdown>
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-center h-full text-muted-foreground">
-                          <div className="text-center">
-                            <FiEye size={32} className="mx-auto mb-2 opacity-50" />
-                            <p>Preview will appear here</p>
-                          </div>
-                        </div>
-                      )}
+                      <MarkdownRenderer content={currentNote.content} />
                     </div>
                   )}
                 </div>
