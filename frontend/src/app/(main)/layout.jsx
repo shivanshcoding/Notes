@@ -2,10 +2,12 @@ import Navbar from "@/components/Navbar";
 
 export default function MainLayout({ children }) {
   return (
-    <div>
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="container mx-auto px-4 py-8">
-        {children}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="animate-fade-in">
+          {children}
+        </div>
       </main>
     </div>
   );

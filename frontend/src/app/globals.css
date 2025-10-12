@@ -1,76 +1,238 @@
-/* ----------------------------------------------------------
-   ✅ 1. Import Tailwind first (must be at the very top)
------------------------------------------------------------*/
 @import "tailwindcss";
 
-/* ----------------------------------------------------------
-   ✅ 3. Base CSS Variables and Theme Colors
------------------------------------------------------------*/
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
-}
-
-/* ----------------------------------------------------------
-   ✅ 4. Dark Mode Media Query
------------------------------------------------------------*/
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* ----------------------------------------------------------
-   ✅ 5. Tailwind Base Layer Overrides
------------------------------------------------------------*/
 @layer base {
-  /* Light Theme (default) */
+  /* CSS Custom Properties for theming */
   :root {
-    --background: 240 5% 96%; /* gray-100 */
-    --foreground: 240 10% 4%; /* gray-950 */
-    --card: 240 5% 100%;      /* white */
-    --card-foreground: 240 10% 4%;
-    --muted: 240 5% 90%;      /* gray-200 */
-    --muted-foreground: 240 4% 46%; /* gray-500 */
+    /* Light theme colors */
+    --background: 210 20% 98%;
+    --foreground: 220 27% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 27% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 27% 12%;
+    --primary: 220 27% 12%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 220 27% 12%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 20% 95%;
+    --accent-foreground: 220 27% 12%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 239 84% 67%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.75rem;
+    
+    /* Brand colors */
+    --brand: 239 84% 67%;
+    --brand-foreground: 210 20% 98%;
+    --brand-hover: 239 84% 60%;
   }
 
-  /* Dark Theme */
   .dark {
-    --background: 240 10% 4%;  /* gray-950 */
-    --foreground: 240 5% 96%;  /* gray-100 */
-    --card: 240 6% 10%;        /* gray-900 */
-    --card-foreground: 240 5% 96%;
-    --muted: 240 4% 16%;       /* gray-800 */
-    --muted-foreground: 240 5% 65%; /* gray-400 */
+    /* Dark theme colors */
+    --background: 222 84% 5%;
+    --foreground: 210 40% 95%;
+    --card: 222 84% 7%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 210 40% 95%;
+    --primary-foreground: 222 84% 5%;
+    --secondary: 217 32% 12%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 217 32% 12%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 32% 12%;
+    --accent-foreground: 210 40% 95%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 95%;
+    --border: 217 32% 15%;
+    --input: 217 32% 15%;
+    --ring: 239 84% 70%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    
+    /* Brand colors for dark mode */
+    --brand: 239 84% 70%;
+    --brand-foreground: 222 84% 5%;
+    --brand-hover: 239 84% 75%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* ----------------------------------------------------------
-   ✅ 6. Custom Scrollbar Styling
------------------------------------------------------------*/
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+    @apply focus:ring-[hsl(var(--ring))];
+  }
+  
+  .btn-primary {
+    @apply shadow-sm text-white;
+    background-color: hsl(var(--brand));
+  }
+  
+  .btn-primary:hover {
+    background-color: hsl(var(--brand-hover));
+  }
+  
+  .btn-secondary {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .btn-secondary:hover {
+    background-color: hsl(var(--secondary) / 0.8);
+  }
+  
+  .btn-ghost:hover {
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+}
+
+/* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background-color: hsl(var(--muted));
+  background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--muted-foreground) / 0.5);
-  border-radius: 10px;
+  background-color: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: hsl(var(--muted-foreground) / 0.7);
+  background-color: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.4s ease-out;
+}
+
+.animate-slide-in-down {
+  animation: slideInDown 0.3s ease-out;
+}
+
+/* Staggered animation for note cards */
+.stagger-animation {
+  animation: fadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+.stagger-9 { animation-delay: 0.9s; }
+
+/* Modal backdrop blur animation */
+.backdrop-blur-animate {
+  backdrop-filter: blur(8px);
+  transition: backdrop-filter 0.3s ease-out;
+}
+
+/* Utility classes */
+@layer utilities {
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
 }
