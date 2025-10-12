@@ -1,5 +1,11 @@
+/* ----------------------------------------------------------
+   ✅ 1. Import Tailwind first (must be at the very top)
+-----------------------------------------------------------*/
 @import "tailwindcss";
 
+/* ----------------------------------------------------------
+   ✅ 3. Base CSS Variables and Theme Colors
+-----------------------------------------------------------*/
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,10 +14,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 }
 
+/* ----------------------------------------------------------
+   ✅ 4. Dark Mode Media Query
+-----------------------------------------------------------*/
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,20 +28,15 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
+/* ----------------------------------------------------------
+   ✅ 5. Tailwind Base Layer Overrides
+-----------------------------------------------------------*/
 @layer base {
-  /* Light Theme */
+  /* Light Theme (default) */
   :root {
     --background: 240 5% 96%; /* gray-100 */
     --foreground: 240 10% 4%; /* gray-950 */
-    --card: 240 5% 100%;     /* white */
+    --card: 240 5% 100%;      /* white */
     --card-foreground: 240 10% 4%;
     --muted: 240 5% 90%;      /* gray-200 */
     --muted-foreground: 240 4% 46%; /* gray-500 */
@@ -42,28 +46,31 @@ body {
   .dark {
     --background: 240 10% 4%;  /* gray-950 */
     --foreground: 240 5% 96%;  /* gray-100 */
-    --card: 240 6% 10%;       /* gray-900 */
+    --card: 240 6% 10%;        /* gray-900 */
     --card-foreground: 240 5% 96%;
-    --muted: 240 4% 16%;      /* gray-800 */
+    --muted: 240 4% 16%;       /* gray-800 */
     --muted-foreground: 240 5% 65%; /* gray-400 */
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
-/* Custom scrollbar */
+/* ----------------------------------------------------------
+   ✅ 6. Custom Scrollbar Styling
+-----------------------------------------------------------*/
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-muted;
+  background-color: hsl(var(--muted));
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/50 rounded-lg;
+  background-color: hsl(var(--muted-foreground) / 0.5);
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/70;
+  background-color: hsl(var(--muted-foreground) / 0.7);
 }
-
