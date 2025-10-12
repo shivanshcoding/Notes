@@ -1,72 +1,98 @@
 @import "tailwindcss";
 
 @layer base {
-  /* CSS Custom Properties for theming */
+  /* Vibrant, Aesthetic Color System 🎨 */
   :root {
-    /* Light theme colors */
-    --background: 210 20% 98%;
-    --foreground: 220 27% 12%;
+    /* Light theme - Vibrant & Modern */
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --background-solid: 210 40% 98%;
+    --foreground: 220 13% 18%;
     --card: 0 0% 100%;
-    --card-foreground: 220 27% 12%;
+    --card-foreground: 220 13% 18%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 27% 12%;
-    --primary: 220 27% 12%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 210 20% 95%;
-    --secondary-foreground: 220 27% 12%;
-    --muted: 210 20% 95%;
+    --popover-foreground: 220 13% 18%;
+    --primary: 220 13% 18%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 220 13% 18%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
-    --accent: 210 20% 95%;
-    --accent-foreground: 220 27% 12%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 220 13% 18%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 210 40% 98%;
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 239 84% 67%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.75rem;
+    --ring: 262 100% 75%;
     
-    /* Brand colors */
-    --brand: 239 84% 67%;
-    --brand-foreground: 210 20% 98%;
-    --brand-hover: 239 84% 60%;
+    /* Vibrant Brand Colors */
+    --brand: 262 100% 75%;              /* Electric Purple */
+    --brand-foreground: 210 40% 98%;
+    --brand-hover: 262 100% 70%;
+    
+    /* Colorful Accent System */
+    --accent-blue: 217 91% 60%;         /* Bright Blue */
+    --accent-pink: 330 81% 60%;         /* Hot Pink */
+    --accent-green: 142 76% 36%;        /* Forest Green */
+    --accent-orange: 25 95% 53%;        /* Orange */
+    --accent-purple: 262 100% 75%;      /* Purple */
+    --accent-teal: 178 60% 48%;         /* Teal */
+    --accent-yellow: 45 93% 47%;        /* Golden Yellow */
+    --accent-red: 0 84% 60%;            /* Red */
+    
+    /* Gradient Backgrounds */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-info: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   }
 
   .dark {
-    /* Dark theme colors */
-    --background: 222 84% 5%;
-    --foreground: 210 40% 95%;
-    --card: 222 84% 7%;
-    --card-foreground: 210 40% 95%;
-    --popover: 222 84% 5%;
-    --popover-foreground: 210 40% 95%;
-    --primary: 210 40% 95%;
-    --primary-foreground: 222 84% 5%;
-    --secondary: 217 32% 12%;
-    --secondary-foreground: 210 40% 95%;
-    --muted: 217 32% 12%;
+    /* Dark theme - Neon & Cyberpunk Vibes */
+    --background-solid: 222 84% 4%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 6%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 84% 4%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 84% 4%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 32% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 217 32% 12%;
-    --accent-foreground: 210 40% 95%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 95%;
-    --border: 217 32% 15%;
-    --input: 217 32% 15%;
-    --ring: 239 84% 70%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 262 100% 75%;
     
-    /* Brand colors for dark mode */
-    --brand: 239 84% 70%;
-    --brand-foreground: 222 84% 5%;
-    --brand-hover: 239 84% 75%;
+    /* Neon Brand Colors */
+    --brand: 262 100% 80%;              /* Neon Purple */
+    --brand-foreground: 222 84% 4%;
+    --brand-hover: 262 100% 85%;
+    
+    /* Neon Accent System */
+    --accent-blue: 217 91% 70%;         /* Neon Blue */
+    --accent-pink: 330 81% 70%;         /* Neon Pink */
+    --accent-green: 142 84% 47%;        /* Neon Green */
+    --accent-orange: 25 95% 63%;        /* Neon Orange */
+    --accent-purple: 262 100% 80%;      /* Neon Purple */
+    --accent-teal: 178 84% 60%;         /* Neon Teal */
+    --accent-yellow: 45 93% 58%;        /* Neon Yellow */
+    --accent-red: 0 84% 70%;            /* Neon Red */
+    
+    /* Dark Gradient Backgrounds */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --gradient-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --gradient-info: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   }
 
   * {
@@ -74,7 +100,7 @@
   }
 
   body {
-    background-color: hsl(var(--background));
+    background: hsl(var(--background-solid));
     color: hsl(var(--foreground));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: 'cv11', 'ss01';
@@ -82,6 +108,27 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* Animated gradient background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    z-index: -1;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  .dark body::before {
+    opacity: 0.15;
+    background: var(--gradient-tertiary);
   }
 }
 
@@ -92,27 +139,112 @@
   }
   
   .btn-primary {
-    @apply shadow-sm text-white;
-    background-color: hsl(var(--brand));
+    @apply shadow-lg text-white relative overflow-hidden;
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
   }
   
-  .btn-primary:hover {
-    background-color: hsl(var(--brand-hover));
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-primary:hover::before {
+    left: 100%;
   }
   
   .btn-secondary {
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--secondary-foreground));
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--muted)));
+    color: hsl(var(--card-foreground));
     border: 1px solid hsl(var(--border));
+    @apply shadow-md hover:shadow-lg transition-all duration-300;
   }
   
   .btn-secondary:hover {
-    background-color: hsl(var(--secondary) / 0.8);
+    background: linear-gradient(135deg, hsl(var(--muted)), hsl(var(--card)));
+    transform: translateY(-1px);
   }
   
   .btn-ghost:hover {
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--secondary-foreground));
+    background: linear-gradient(135deg, hsl(var(--accent-blue) / 0.1), hsl(var(--accent-purple) / 0.1));
+    color: hsl(var(--card-foreground));
+    transform: translateY(-1px);
+  }
+  
+  /* Colorful Action Buttons with Enhanced Animations */
+  .btn-edit {
+    background: var(--gradient-tertiary);
+    background-size: 200% 200%;
+    @apply text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 relative overflow-hidden;
+    animation: gradientShift 4s ease infinite;
+  }
+  
+  .btn-edit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s;
+  }
+  
+  .btn-edit:hover::before {
+    left: 100%;
+  }
+  
+  .btn-delete {
+    background: var(--gradient-secondary);
+    background-size: 200% 200%;
+    @apply text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 relative overflow-hidden;
+    animation: gradientShift 4s ease infinite;
+    animation-delay: 1s;
+  }
+  
+  .btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s;
+  }
+  
+  .btn-delete:hover::before {
+    left: 100%;
+  }
+  
+  .btn-preview {
+    background: var(--gradient-success);
+    background-size: 200% 200%;
+    @apply text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 relative overflow-hidden;
+    animation: gradientShift 4s ease infinite;
+    animation-delay: 2s;
+  }
+  
+  .btn-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s;
+  }
+  
+  .btn-preview:hover::before {
+    left: 100%;
   }
 }
 
@@ -172,6 +304,83 @@
   }
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6);
+  }
+}
+
+@keyframes rainbowGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 0, 150, 0.6), 0 0 40px rgba(255, 0, 150, 0.4);
+  }
+  25% {
+    box-shadow: 0 0 20px rgba(0, 255, 150, 0.6), 0 0 40px rgba(0, 255, 150, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(150, 0, 255, 0.6), 0 0 40px rgba(150, 0, 255, 0.4);
+  }
+  75% {
+    box-shadow: 0 0 20px rgba(255, 150, 0, 0.6), 0 0 40px rgba(255, 150, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 0, 150, 0.6), 0 0 40px rgba(255, 0, 150, 0.4);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes colorShift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out;
 }
@@ -206,7 +415,657 @@
   transition: backdrop-filter 0.3s ease-out;
 }
 
-/* Utility classes */
+/* Enhanced Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-backdrop.animate-in {
+  animation: backdropFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modal-backdrop.animate-out {
+  animation: backdropFadeOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Confirmation Modal Specific Styles */
+.confirmation-modal {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  min-height: 280px;
+  max-height: 90vh;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, hsl(var(--card) / 0.95), hsl(var(--card) / 0.85));
+}
+
+.confirmation-modal-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.confirmation-modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 2rem;
+  gap: 1.5rem;
+}
+
+.confirmation-modal-icon {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.confirmation-modal-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(20px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.confirmation-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.confirmation-modal-message {
+  font-size: 1rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+  max-width: 24rem;
+}
+
+.confirmation-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, hsl(var(--muted) / 0.1), hsl(var(--muted) / 0.2));
+  border-top: 1px solid hsl(var(--border) / 0.5);
+}
+
+.confirmation-modal-button {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  min-width: 120px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.confirmation-modal-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.confirmation-modal-button:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.confirmation-modal-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.confirmation-modal-button-cancel {
+  background: hsl(var(--muted) / 0.5);
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border) / 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.confirmation-modal-button-cancel:hover {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+.confirmation-modal-button-confirm {
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.confirmation-modal-button-confirm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.confirmation-modal-button-confirm:hover::before {
+  left: 100%;
+}
+
+/* Responsive Modal Sizing */
+@media (max-width: 640px) {
+  .confirmation-modal {
+    max-width: calc(100vw - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    min-height: 260px;
+  }
+  
+  .confirmation-modal-header {
+    padding: 1.5rem 1.5rem;
+    gap: 1rem;
+  }
+  
+  .confirmation-modal-icon {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  .confirmation-modal-title {
+    font-size: 1.25rem;
+  }
+  
+  .confirmation-modal-message {
+    font-size: 0.875rem;
+  }
+  
+  .confirmation-modal-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .confirmation-modal-button {
+    width: 100%;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .confirmation-modal {
+    max-width: 32rem;
+  }
+}
+
+/* Large Editor Modal Responsive Sizing */
+.editor-modal {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  max-height: 95vh;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .editor-modal {
+    max-width: calc(100vw - 1rem);
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    max-height: 98vh;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1280px) {
+  .editor-modal {
+    max-width: 72rem;
+  }
+}
+
+/* Modal Animation Classes */
+.modal-enter {
+  animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modal-exit {
+  animation: modalSlideOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Content Overflow Handling */
+.modal-scrollable {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+.modal-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scrollable::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.modal-scrollable::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Editor Text Styling - Fix for Light Theme */
+.editor-modal input,
+.editor-modal textarea {
+  color: hsl(var(--foreground));
+  background-color: transparent;
+}
+
+.editor-modal input::placeholder,
+.editor-modal textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 0.8;
+}
+
+.editor-modal input:focus,
+.editor-modal textarea:focus {
+  color: hsl(var(--foreground));
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ensure proper text contrast in light theme */
+:root .editor-modal input,
+:root .editor-modal textarea {
+  color: hsl(220 13% 18%); /* Dark text for light theme */
+}
+
+:root .editor-modal input::placeholder,
+:root .editor-modal textarea::placeholder {
+  color: hsl(215 16% 47%); /* Muted text for light theme */
+}
+
+/* Dark theme text (already working but for consistency) */
+.dark .editor-modal input,
+.dark .editor-modal textarea {
+  color: hsl(210 40% 98%); /* Light text for dark theme */
+}
+
+.dark .editor-modal input::placeholder,
+.dark .editor-modal textarea::placeholder {
+  color: hsl(215 20% 65%); /* Muted text for dark theme */
+}
+
+/* Header panel text colors */
+.editor-modal .text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+.editor-modal .text-foreground {
+  color: hsl(var(--foreground));
+}
+
+/* Fix for guide button text in light theme */
+.editor-modal .text-black {
+  color: #000000 !important;
+  font-weight: 600;
+}
+
+/* Ensure proper text styling for editor panels */
+.editor-modal [class*="bg-muted"] {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Additional text fixes for specific editor elements */
+.editor-modal h2 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.editor-modal .font-mono {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  color: hsl(var(--foreground));
+}
+
+/* Mobile tab text styling */
+.editor-modal .text-muted-foreground:not(.bg-gradient-tertiary):not(.bg-gradient-success) {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Character count and word count text */
+.editor-modal .text-sm.text-muted-foreground {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Force proper text color inheritance */
+:root .editor-modal * {
+  color: inherit;
+}
+
+:root .editor-modal input,
+:root .editor-modal textarea,
+:root .editor-modal h1,
+:root .editor-modal h2,
+:root .editor-modal h3,
+:root .editor-modal p,
+:root .editor-modal span:not(.text-white) {
+  color: hsl(220 13% 18%) !important;
+}
+
+.dark .editor-modal input,
+.dark .editor-modal textarea,
+.dark .editor-modal h1,
+.dark .editor-modal h2,
+.dark .editor-modal h3,
+.dark .editor-modal p,
+.dark .editor-modal span:not(.text-white) {
+  color: hsl(210 40% 98%) !important;
+}
+
+/* Specific fix for markdown editor textarea */
+.editor-modal textarea.font-mono {
+  color: hsl(var(--foreground)) !important;
+  caret-color: hsl(var(--foreground));
+}
+
+:root .editor-modal textarea.font-mono {
+  color: hsl(220 13% 18%) !important;
+  caret-color: hsl(220 13% 18%);
+}
+
+.dark .editor-modal textarea.font-mono {
+  color: hsl(210 40% 98%) !important;
+  caret-color: hsl(210 40% 98%);
+}
+
+/* Fix for title input */
+.editor-modal input[type="text"] {
+  color: hsl(var(--foreground)) !important;
+  caret-color: hsl(var(--foreground));
+}
+
+:root .editor-modal input[type="text"] {
+  color: hsl(220 13% 18%) !important;
+  caret-color: hsl(220 13% 18%);
+}
+
+.dark .editor-modal input[type="text"] {
+  color: hsl(210 40% 98%) !important;
+  caret-color: hsl(210 40% 98%);
+}
+
+/* SIMPLE SOLUTION: White font for editor modal in ALL themes */
+.editor-modal input,
+.editor-modal textarea,
+.editor-modal h1,
+.editor-modal h2,
+.editor-modal h3,
+.editor-modal p,
+.editor-modal span:not(.text-black),
+.editor-modal div {
+  color: white !important;
+  caret-color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.editor-modal input::placeholder,
+.editor-modal textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Maximum specificity override for all editor text elements */
+html body .editor-modal form textarea,
+html body .editor-modal form input[type="text"],
+html body .editor-modal div textarea,
+html body .editor-modal div input[type="text"] {
+  color: white !important;
+  background-color: transparent !important;
+  caret-color: white !important;
+  -webkit-text-fill-color: white !important;
+  text-shadow: none !important;
+}
+
+/* White text for all text elements */
+html body .editor-modal .text-foreground,
+html body .editor-modal .text-muted-foreground:not(.text-black),
+html body .editor-modal [class*="text-"]:not(.text-black):not(.text-white) {
+  color: white !important;
+}
+
+/* Placeholders - semi-transparent white */
+html body .editor-modal textarea::placeholder,
+html body .editor-modal input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* EXCEPTIONS: Theme-specific Cancel button colors */
+.editor-modal .text-black,
+.editor-modal button .text-black {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Cancel button - Black text in light theme */
+:root .editor-modal button[class*="btn-secondary"],
+:root .editor-modal button[class*="Cancel"],
+:root .editor-modal button[aria-label*="Cancel"],
+:root .editor-modal button[title*="Cancel"],
+:root .editor-modal button[class*="cancel"],
+:root .editor-modal button[data-action="cancel"] {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Cancel button - White text in dark theme */
+.dark .editor-modal button[class*="btn-secondary"],
+.dark .editor-modal button[class*="Cancel"],
+.dark .editor-modal button[aria-label*="Cancel"],
+.dark .editor-modal button[title*="Cancel"],
+.dark .editor-modal button[class*="cancel"],
+.dark .editor-modal button[data-action="cancel"] {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Guide button - BLACK text on all themes */
+.editor-modal button[title*="Guide"],
+.editor-modal button[title*="Guide"] *,
+.editor-modal button[title*="Guide"] span,
+.editor-modal button[title*="Markdown Guide"],
+.editor-modal button[title*="Markdown Guide"] *,
+.editor-modal button[title*="Markdown Guide"] span,
+.editor-modal button[aria-label*="Guide"],
+.editor-modal button[aria-label*="Guide"] *,
+.editor-modal button[aria-label*="Guide"] span,
+.editor-modal button[class*="guide"],
+.editor-modal button[class*="guide"] *,
+.editor-modal button[class*="guide"] span {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Theme-specific targeting for Cancel button children elements */
+/* Light theme - Black text for Cancel button children */
+:root .editor-modal .btn-secondary,
+:root .editor-modal .btn-secondary *,
+:root .editor-modal .btn.btn-secondary,
+:root .editor-modal .btn.btn-secondary span,
+:root .editor-modal .btn.btn-secondary * {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Dark theme - White text for Cancel button children */
+.dark .editor-modal .btn-secondary,
+.dark .editor-modal .btn-secondary *,
+.dark .editor-modal .btn.btn-secondary,
+.dark .editor-modal .btn.btn-secondary span,
+.dark .editor-modal .btn.btn-secondary * {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Force BLACK text for Guide button content (bg-gradient-info typically used for Guide buttons) */
+.editor-modal .bg-gradient-info,
+.editor-modal .bg-gradient-info *,
+.editor-modal .bg-gradient-info span,
+.editor-modal button[class*="bg-gradient-info"],
+.editor-modal button[class*="bg-gradient-info"] *,
+.editor-modal button[class*="bg-gradient-info"] span {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Enhanced focus states for modals */
+.confirmation-modal-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.confirmation-modal-button-cancel:focus-visible {
+  outline: 2px solid hsl(var(--muted-foreground) / 0.5);
+  outline-offset: 2px;
+}
+
+.confirmation-modal-button-confirm:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Modal backdrop click protection */
+.modal-backdrop {
+  cursor: pointer;
+}
+
+.confirmation-modal,
+.editor-modal {
+  cursor: default;
+}
+
+/* Enhanced visual depth with layered shadows */
+.confirmation-modal {
+  box-shadow: 
+    0 0 0 1px hsl(var(--border) / 0.3),
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 20px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.dark .confirmation-modal {
+  box-shadow: 
+    0 0 0 1px hsl(var(--border) / 0.5),
+    0 10px 25px -5px rgba(0, 0, 0, 0.6),
+    0 20px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(138, 43, 226, 0.1);
+}
+
+/* Confirmation modal type-specific enhancements */
+.confirmation-modal-icon.bg-gradient-secondary {
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+}
+
+.confirmation-modal-icon.bg-gradient-warning {
+  box-shadow: 0 8px 25px rgba(250, 112, 154, 0.4);
+}
+
+.confirmation-modal-icon.bg-gradient-info {
+  box-shadow: 0 8px 25px rgba(168, 237, 234, 0.4);
+}
+
+/* Markdown Guide Modal ONLY - WHITE text on ALL themes (identify by Book icon) */
+.fixed.inset-0 .bg-card:has(.text-brand) h1,
+.fixed.inset-0 .bg-card:has(.text-brand) h2,
+.fixed.inset-0 .bg-card:has(.text-brand) h3,
+.fixed.inset-0 .bg-card:has(.text-brand) h4,
+.fixed.inset-0 .bg-card:has(.text-brand) h5,
+.fixed.inset-0 .bg-card:has(.text-brand) h6,
+.fixed.inset-0 .bg-card:has(.text-brand) p,
+.fixed.inset-0 .bg-card:has(.text-brand) span:not(button span),
+.fixed.inset-0 .bg-card:has(.text-brand) div,
+.fixed.inset-0 .bg-card:has(.text-brand) li,
+.fixed.inset-0 .bg-card:has(.text-brand) td,
+.fixed.inset-0 .bg-card:has(.text-brand) th,
+.fixed.inset-0 .bg-card:has(.text-brand) blockquote,
+.fixed.inset-0 .bg-card:has(.text-brand) code,
+.fixed.inset-0 .bg-card:has(.text-brand) pre,
+.fixed.inset-0 .bg-card:has(.text-brand) .text-foreground,
+.fixed.inset-0 .bg-card:has(.text-brand) .text-muted-foreground {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Markdown Guide Modal ONLY - Specific targeting for all text elements */
+.fixed.inset-0 .bg-card:has(.text-brand) [class*="text-"]:not(button),
+.fixed.inset-0 .bg-card:has(.text-brand) [class*="text-"]:not(button *),
+.fixed.inset-0 .bg-card:has(.text-brand) .prose,
+.fixed.inset-0 .bg-card:has(.text-brand) .prose *:not(.text-black):not(button):not(button *) {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Markdown Guide Modal ONLY - Button styling */
+/* Close button with black text */
+.fixed.inset-0 .bg-card:has(.text-brand) button:not(.btn-primary),
+.fixed.inset-0 .bg-card:has(.text-brand) button:not(.btn-primary) * {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Got it button - WHITE text on all themes */
+.fixed.inset-0 .bg-card:has(.text-brand) .btn-primary,
+.fixed.inset-0 .bg-card:has(.text-brand) .btn-primary *,
+.fixed.inset-0 .bg-card:has(.text-brand) button.btn-primary,
+.fixed.inset-0 .bg-card:has(.text-brand) button.btn-primary * {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Smooth state transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Colorful Utility Classes */
 @layer utilities {
   .line-clamp-1 {
     display: -webkit-box;
@@ -235,4 +1094,211 @@
     -webkit-line-clamp: 4;
     overflow: hidden;
   }
+  
+  /* Colorful backgrounds */
+  .bg-gradient-primary { background: var(--gradient-primary); }
+  .bg-gradient-secondary { background: var(--gradient-secondary); }
+  .bg-gradient-tertiary { background: var(--gradient-tertiary); }
+  .bg-gradient-success { background: var(--gradient-success); }
+  .bg-gradient-warning { background: var(--gradient-warning); }
+  .bg-gradient-info { background: var(--gradient-info); }
+  
+  /* Colorful text */
+  .text-accent-blue { color: hsl(var(--accent-blue)); }
+  .text-accent-pink { color: hsl(var(--accent-pink)); }
+  .text-accent-green { color: hsl(var(--accent-green)); }
+  .text-accent-orange { color: hsl(var(--accent-orange)); }
+  .text-accent-purple { color: hsl(var(--accent-purple)); }
+  .text-accent-teal { color: hsl(var(--accent-teal)); }
+  .text-accent-yellow { color: hsl(var(--accent-yellow)); }
+  .text-accent-red { color: hsl(var(--accent-red)); }
+  
+  /* Floating animation */
+  .float { animation: float 6s ease-in-out infinite; }
+  
+  /* Glowing effect */
+  .glow { animation: glow 2s ease-in-out infinite alternate; }
+  
+  /* Glass morphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Colorful borders */
+  .border-gradient {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+  }
+  
+  .dark .border-gradient {
+    background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+                var(--gradient-tertiary) border-box;
+  }
+  
+  /* Enhanced Note Card Effects */
+  .note-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-out;
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--card)/0.8));
+    backdrop-filter: blur(20px);
+  }
+  
+  .note-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(102, 126, 234, 0.1) 0%, 
+      rgba(118, 75, 162, 0.1) 25%,
+      rgba(240, 147, 251, 0.1) 50%,
+      rgba(245, 87, 108, 0.1) 75%,
+      rgba(79, 172, 254, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+  }
+  
+  .note-card:hover::before {
+    opacity: 1;
+  }
+  
+  .note-card-content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Beautiful Button Animations */
+  .btn-action {
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+    transform: translateZ(0);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn-action:hover {
+    transform: scale(1.25);
+  }
+  
+  .btn-action::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%);
+  }
+  
+  .btn-action:hover::before {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Rainbow glow effect */
+  .rainbow-glow {
+    animation: rainbowGlow 3s ease-in-out infinite;
+  }
+  
+  /* Bounce animation */
+  .bounce { animation: bounce 2s ease-in-out infinite; }
+  
+  /* Shake animation */
+  .shake { animation: shake 0.5s ease-in-out; }
+  
+  /* Color shift animation */
+  .color-shift { animation: colorShift 10s linear infinite; }
+  
+  /* Magical sparkle effect */
+  .sparkle {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sparkle::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+      radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
+      radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+    background-size: 50px 50px, 100px 100px, 150px 150px;
+    animation: sparkleMove 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .sparkle:hover::after {
+    opacity: 1;
+  }
+  
+@keyframes sparkleMove {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes backdropFadeOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+}
 }

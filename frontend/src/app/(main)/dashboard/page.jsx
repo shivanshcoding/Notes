@@ -6,6 +6,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import MarkdownGuide from '@/components/MarkdownGuide';
+import MarkdownPreview from '@/components/MarkdownPreview';
+import ConfirmationModal from '@/components/ConfirmationModal';
 import NoteCard from '@/components/NoteCard';
 import { IoMdAdd, IoMdClose } from 'react-icons/io';
 import { FiEdit, FiEye, FiBook } from 'react-icons/fi';
@@ -18,6 +20,15 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('write'); // For mobile: 'write' or 'preview'
   const [isLoading, setIsLoading] = useState(true);
   const [showMarkdownGuide, setShowMarkdownGuide] = useState(false);
+  const [previewNote, setPreviewNote] = useState(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    onConfirm: null,
+    type: 'danger'
+  });
 
   const fetchNotes = async () => {
     if (!session?.accessToken) return;
@@ -62,22 +73,28 @@ export default function Dashboard() {
     } catch (error) { /* Toast handles error */ }
   };
 
-  const handleDeleteNote = async (id) => {
-    // A custom modal would be better than confirm, but for simplicity:
-    if (!window.confirm("Are you sure? This action cannot be undone.")) return;
-    const config = { headers: { Authorization: `Bearer ${session.accessToken}` } };
-    const promise = axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
+  const handleDeleteNote = (id, noteTitle) => {
+    setConfirmationModal({
+      isOpen: true,
+      title: 'Delete Note? 🗑️',
+      message: `Are you sure you want to delete "${noteTitle}"? This action cannot be undone and your note will be lost forever.`,
+      type: 'danger',
+      onConfirm: async () => {
+        const config = { headers: { Authorization: `Bearer ${session.accessToken}` } };
+        const promise = axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/notes/${id}`, config);
 
-    toast.promise(promise, {
-      loading: 'Deleting note...',
-      success: 'Note deleted!',
-      error: 'Failed to delete note.',
+        toast.promise(promise, {
+          loading: 'Deleting note... 🔄',
+          success: 'Note deleted successfully! ✅',
+          error: 'Failed to delete note. ❌',
+        });
+
+        try {
+          await promise;
+          fetchNotes();
+        } catch (error) { /* Toast handles error */ }
+      }
     });
-
-    try {
-      await promise;
-      fetchNotes();
-    } catch (error) { /* Toast handles error */ }
   };
 
   const openEditorForNew = () => {
@@ -95,6 +112,16 @@ export default function Dashboard() {
   const closeEditor = () => {
     setIsEditorOpen(false);
     setActiveTab('write');
+  };
+
+  const openPreview = (note) => {
+    setPreviewNote(note);
+    setIsPreviewOpen(true);
+  };
+
+  const closePreview = () => {
+    setIsPreviewOpen(false);
+    setPreviewNote(null);
   };
 
   if (isLoading) {
@@ -123,19 +150,27 @@ export default function Dashboard() {
   return (
     <>
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-foreground tracking-tight">Your Notes</h1>
-          <p className="text-muted-foreground text-lg">
-            {notes.length === 0 ? 'Start your journey' : `${notes.length} ${notes.length === 1 ? 'note' : 'notes'} created`}
+      <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center gap-6 mb-12">
+        <div className="space-y-3">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-brand via-accent-purple to-accent-pink bg-clip-text animate-fade-in color-shift">
+            Your Notes ✨
+          </h1>
+          <p className="text-muted-foreground text-lg sm:text-xl font-medium">
+            {notes.length === 0 ? (
+              <span className="animate-bounce">🚀 Start your creative journey</span>
+            ) : (
+              <span className="">
+                📚 {notes.length} {notes.length === 1 ? 'masterpiece' : 'masterpieces'} created
+              </span>
+            )}
           </p>
         </div>
         <button 
           onClick={openEditorForNew} 
-          className="btn btn-primary text-base px-6 py-3 h-auto shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+          className="btn btn-primary text-base px-8 py-4 h-auto shadow-xl hover:shadow-2xl rainbow-glow transform hover:scale-105 transition-all duration-300 sparkle"
         >
-          <IoMdAdd size={20} className="mr-2" />
-          New Note
+          <IoMdAdd size={22} className="mr-3" />
+        Create Magic ✨
         </button>
       </div>
 
@@ -144,11 +179,12 @@ export default function Dashboard() {
         {notes.length > 0 ? (
           notes.map((note, index) => (
             <div key={note._id} className={`stagger-animation stagger-${Math.min(index + 1, 9)}`}>
-              <div onClick={() => openEditorForEdit(note)}>
+              <div onClick={() => openPreview(note)}>
                 <NoteCard 
                   note={note} 
+                  onPreview={() => openPreview(note)}
                   onEdit={() => openEditorForEdit(note)} 
-                  onDelete={() => handleDeleteNote(note._id)} 
+                  onDelete={() => handleDeleteNote(note._id, note.title)} 
                 />
               </div>
             </div>
@@ -175,59 +211,59 @@ export default function Dashboard() {
 
       {/* Sophisticated Markdown Editor Modal */}
       {isEditorOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-animate flex items-center justify-center p-4 z-50 animate-slide-in-up">
-          <div className="bg-card border border-border rounded-2xl w-full max-w-7xl max-h-[90vh] h-full shadow-2xl overflow-hidden animate-slide-in-up flex flex-col">
+        <div className="modal-backdrop animate-in">
+          <div className="editor-modal bg-card border border-border rounded-2xl shadow-2xl overflow-hidden modal-enter flex flex-col">
             {/* Modal Header */}
             <div className="border-b border-border px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-4">
-                  <h2 className="text-xl font-semibold text-foreground">
+                  <h2 className="text-xl font-semibold text-white">
                     {currentNote.id ? 'Edit Note' : 'New Note'}
                   </h2>
                   <button
                     type="button"
                     onClick={() => setShowMarkdownGuide(true)}
-                    className="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
-                    title="Markdown Guide"
+                    className="flex btn-action bg-gradient-info hover:shadow-lg sparkle relative overflow-hidden transform hover:scale-110 transition-all duration-300"
+                    title="Markdown Guide - Learn formatting tips!"
                   >
-                    <FiBook size={16} />
-                    <span className="hidden sm:inline">Guide</span>
+                    <span className="hidden sm:inline font-medium text-black">📖 Guide</span>
                   </button>
                 </div>
                 {/* Mobile Tab Controls */}
-                <div className="flex md:hidden bg-muted rounded-lg p-1">
+                <div className="flex md:hidden bg-gradient-to-r from-muted to-muted/50 rounded-xl p-1 shadow-inner">
                   <button
                     type="button"
                     onClick={() => setActiveTab('write')}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform ${
                       activeTab === 'write'
-                        ? 'bg-background text-foreground shadow-sm'
-                        : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-gradient-tertiary text-white shadow-lg scale-105 sparkle'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-white/10 hover:scale-102'
                     }`}
                   >
-                    <FiEdit size={16} />
-                    Write
+                    <FiEdit size={16} className={activeTab === 'write' ? 'bounce' : ''} />
+                    ✍️ Write
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab('preview')}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform ${
                       activeTab === 'preview'
-                        ? 'bg-background text-foreground shadow-sm'
-                        : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-gradient-success text-white shadow-lg scale-105 sparkle'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-white/10 hover:scale-102'
                     }`}
                   >
-                    <FiEye size={16} />
-                    Preview
+                    <FiEye size={16} className={activeTab === 'preview' ? 'bounce' : ''} />
+                    👁️ Preview
                   </button>
                 </div>
               </div>
               <button
                 onClick={closeEditor}
-                className="p-2 hover:bg-muted rounded-lg transition-colors"
+                className="btn-action hover:bg-destructive/20 hover:text-destructive hover:shadow-lg transform hover:scale-110 hover:rotate-90 transition-all duration-300"
                 type="button"
+                title="Close editor"
               >
-                <IoMdClose size={20} className="text-muted-foreground" />
+                <IoMdClose size={20} className="shake" />
               </button>
             </div>
 
@@ -328,24 +364,24 @@ Switch to Preview tab to see results 🚀"
               </div>
 
               {/* Footer Actions */}
-              <div className="px-6 py-4 border-t border-border flex items-center justify-between bg-muted/20">
-                <div className="text-sm text-muted-foreground">
-                  {currentNote.content.length} characters
+              <div className="px-6 py-4 border-t border-border flex items-center justify-between bg-gradient-to-r from-muted/10 via-muted/20 to-muted/10">
+                <div className="text-sm text-muted-foreground font-medium">
+                  📝 {currentNote.content.length} characters • {currentNote.content.split(' ').length} words
                 </div>
                 <div className="flex gap-3">
                   <button 
                     type="button" 
                     onClick={closeEditor} 
-                    className="btn btn-secondary"
+                    className="btn btn-secondary transform hover:scale-105 transition-all duration-300 sparkle hover:shadow-lg"
                   >
-                    Cancel
+                    ❌ Cancel
                   </button>
                   <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="btn btn-primary transform hover:scale-105 transition-all duration-300 rainbow-glow hover:shadow-2xl sparkle disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     disabled={!currentNote.title.trim() || !currentNote.content.trim()}
                   >
-                    {currentNote.id ? 'Update Note' : 'Create Note'}
+                    {currentNote.id ? '✨ Update Magic' : '✨ Create Magic'}
                   </button>
                 </div>
               </div>
@@ -358,6 +394,36 @@ Switch to Preview tab to see results 🚀"
       <MarkdownGuide 
         isOpen={showMarkdownGuide} 
         onClose={() => setShowMarkdownGuide(false)} 
+      />
+      
+      {/* Markdown Preview Modal */}
+      <MarkdownPreview 
+        note={previewNote}
+        isOpen={isPreviewOpen}
+        onClose={closePreview}
+        onEdit={() => {
+          if (previewNote) {
+            openEditorForEdit(previewNote);
+            closePreview();
+          }
+        }}
+        onDelete={() => {
+          if (previewNote) {
+            handleDeleteNote(previewNote._id, previewNote.title);
+          }
+        }}
+      />
+      
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={confirmationModal.isOpen}
+        onClose={() => setConfirmationModal({ ...confirmationModal, isOpen: false })}
+        onConfirm={confirmationModal.onConfirm}
+        title={confirmationModal.title}
+        message={confirmationModal.message}
+        type={confirmationModal.type}
+        confirmText={confirmationModal.type === 'danger' ? '🗑️ Delete Forever' : 'Confirm'}
+        cancelText="❌ Cancel"
       />
     </>
   );

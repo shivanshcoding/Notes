@@ -1,13 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiLogOut, FiEdit3 } from 'react-icons/fi';
 import { ThemeToggle } from './ThemeToggle';
+import ConfirmationModal from './ConfirmationModal';
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 animate-slide-in-down">
@@ -70,7 +73,7 @@ export default function Navbar() {
                   
                   {/* Sign out button */}
                   <button 
-                    onClick={() => signOut({ callbackUrl: '/login' })} 
+                    onClick={() => setShowLogoutConfirm(true)} 
                     className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-all duration-200 transform hover:scale-110"
                     title="Sign out"
                   >
@@ -82,6 +85,18 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      
+      {/* Logout Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+        onConfirm={() => signOut({ callbackUrl: '/login' })}
+        title="Sign Out? 👋"
+        message={`Hey ${session?.user?.name?.split(' ')[0] || 'there'}! Are you sure you want to sign out? You'll need to sign in again to access your notes.`}
+        type="warning"
+        confirmText="🚪 Sign Out"
+        cancelText="❌ Stay Signed In"
+      />
     </nav>
   );
 }

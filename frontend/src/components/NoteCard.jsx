@@ -2,9 +2,9 @@
 
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { FiEdit, FiTrash2, FiClock } from 'react-icons/fi';
+import { FiEdit, FiTrash2, FiClock, FiEye } from 'react-icons/fi';
 
-export default function NoteCard({ note, onEdit, onDelete }) {
+export default function NoteCard({ note, onEdit, onDelete, onPreview }) {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -27,36 +27,43 @@ export default function NoteCard({ note, onEdit, onDelete }) {
   };
 
   return (
-    <div className="group bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20 hover:scale-[1.02] hover:border-brand/50 transition-all duration-300 cursor-pointer relative overflow-hidden">
-      {/* Subtle gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-      
-      <div className="relative z-10 flex flex-col h-full">
+    <div className="group note-card border border-border rounded-xl p-6 shadow-lg hover:shadow-2xl hover:shadow-brand/20 hover:scale-[1.03] hover:border-brand/50 transition-all duration-500 cursor-pointer sparkle">
+      <div className="note-card-content flex flex-col h-full">
         {/* Header */}
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-brand transition-colors duration-200 line-clamp-2 leading-tight">
+          <h3 className="text-lg font-bold text-foreground group-hover:text-brand transition-all duration-300 line-clamp-2 leading-tight color-shift">
             {note.title}
           </h3>
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2">
+          <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300 ml-2 transform translate-x-2 group-hover:translate-x-0">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                onPreview();
+              }}
+              className="btn-action btn-preview"
+              title="Preview note"
+            >
+              <FiEye size={14} />
+            </button>
             <button 
               onClick={(e) => {
                 e.stopPropagation();
                 onEdit();
               }}
-              className="p-1.5 hover:bg-brand/10 hover:text-brand rounded-lg transition-all duration-200 transform hover:scale-110"
+              className="btn-action btn-edit"
               title="Edit note"
             >
-              <FiEdit size={16} />
+              <FiEdit size={14} />
             </button>
             <button 
               onClick={(e) => {
                 e.stopPropagation();
                 onDelete();
               }}
-              className="p-1.5 hover:bg-destructive/10 hover:text-destructive rounded-lg transition-all duration-200 transform hover:scale-110"
+              className="btn-action btn-delete"
               title="Delete note"
             >
-              <FiTrash2 size={16} />
+              <FiTrash2 size={14} />
             </button>
           </div>
         </div>
@@ -64,7 +71,7 @@ export default function NoteCard({ note, onEdit, onDelete }) {
         {/* Content Preview */}
         <div className="flex-1 mb-4">
           <div className="prose prose-sm dark:prose-invert text-muted-foreground max-w-none overflow-hidden">
-            <div className="line-clamp-4 leading-relaxed">
+            <div className="line-clamp-4 leading-relaxed group-hover:text-foreground transition-colors duration-300">
               <ReactMarkdown 
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -91,13 +98,13 @@ export default function NoteCard({ note, onEdit, onDelete }) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-border">
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <FiClock size={12} />
+        <div className="flex items-center justify-between pt-3 border-t border-border/50 group-hover:border-brand/30 transition-colors duration-300">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground group-hover:text-brand/80 transition-colors duration-300">
+            <FiClock size={12} className="bounce" />
             <span>{formatDate(note.updatedAt)}</span>
           </div>
-          <div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            Click to edit
+          <div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+            Click to preview • Edit • Delete
           </div>
         </div>
       </div>

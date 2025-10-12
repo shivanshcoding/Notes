@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -30,13 +31,13 @@ const MarkdownComponents = {
     }
     
     return (
-      <div className="relative group">
+      <div className="relative group" suppressHydrationWarning>
         {language && (
           <div className="absolute top-0 right-0 bg-muted/80 text-muted-foreground px-2 py-1 text-xs rounded-bl-md rounded-tr-lg">
             {language}
           </div>
         )}
-        <pre className="bg-muted/30 border rounded-lg p-4 overflow-x-auto">
+        <pre className="bg-muted/30 border rounded-lg p-4 overflow-x-auto" suppressHydrationWarning>
           <code className={className} {...props}>
             {children}
           </code>
@@ -142,12 +143,15 @@ const MarkdownComponents = {
     </h6>
   ),
 
-  // Enhanced paragraphs
-  p: ({ children }) => (
-    <p className="leading-relaxed mb-4 text-foreground/90">
-      {children}
-    </p>
-  ),
+  // Enhanced paragraphs - prevent nesting issues
+  p: ({ children }) => {
+    // Always use div to prevent any HTML nesting issues
+    return (
+      <div className="leading-relaxed mb-4 text-foreground/90" suppressHydrationWarning>
+        {children}
+      </div>
+    );
+  },
 
   // Enhanced links
   a: ({ href, children }) => (
@@ -237,7 +241,7 @@ export default function MarkdownRenderer({ content, className = "" }) {
   }
 
   return (
-    <div className={`prose prose-slate dark:prose-invert max-w-none ${className}`}>
+    <div className={`prose prose-slate dark:prose-invert max-w-none ${className}`} suppressHydrationWarning>
       <ReactMarkdown
         components={MarkdownComponents}
         remarkPlugins={[
@@ -248,9 +252,8 @@ export default function MarkdownRenderer({ content, className = "" }) {
         rehypePlugins={[
           rehypeKatex,    // Render math equations
           rehypeHighlight, // Syntax highlighting for code blocks
-          rehypeRaw,      // Allow raw HTML
         ]}
-        skipHtml={false}
+        skipHtml={true}
       >
         {content}
       </ReactMarkdown>
