@@ -1,4 +1,4 @@
-/* @import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -26,34 +26,34 @@ body {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+
 @layer base {
-  /* Light Theme
+  /* Light Theme */
   :root {
-    --background: 240 5% 96%; /* hsl(240, 5%, 96%) - gray-100 
-    --foreground: 240 10% 4%; /* hsl(240, 10%, 4%) - gray-950 
-    --card: 240 5% 100%;     /* hsl(240, 5%, 100%) - white 
+    --background: 240 5% 96%; /* gray-100 */
+    --foreground: 240 10% 4%; /* gray-950 */
+    --card: 240 5% 100%;     /* white */
     --card-foreground: 240 10% 4%;
-    --muted: 240 5% 90%;      /* hsl(240, 5%, 90%) - gray-200 
-    --muted-foreground: 240 4% 46%; /* hsl(240, 4%, 46%) - gray-500 
+    --muted: 240 5% 90%;      /* gray-200 */
+    --muted-foreground: 240 4% 46%; /* gray-500 */
   }
 
-  /* Dark Theme 
+  /* Dark Theme */
   .dark {
-    --background: 240 10% 4%;  /* hsl(240, 10%, 4%) - gray-950 
-    --foreground: 240 5% 96%;  /* hsl(240, 5%, 96%) - gray-100 
-    --card: 240 6% 10%;       /* hsl(240, 6%, 10%) - gray-900 
+    --background: 240 10% 4%;  /* gray-950 */
+    --foreground: 240 5% 96%;  /* gray-100 */
+    --card: 240 6% 10%;       /* gray-900 */
     --card-foreground: 240 5% 96%;
-    --muted: 240 4% 16%;      /* hsl(240, 4%, 16%) - gray-800 
-    --muted-foreground: 240 5% 65%; /* hsl(240, 5%, 65%) - gray-400 
+    --muted: 240 4% 16%;      /* gray-800 */
+    --muted-foreground: 240 5% 65%; /* gray-400 */
   }
 
   body {
     @apply bg-background text-foreground antialiased;
   }
-} */
+}
 
-/* Custom scrollbar
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -66,56 +66,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/70;
 }
- */
 
-/* 1. Place all imports at the very top */
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
-
-/* 2. Define all theme variables and base styles within a layer */
-@layer base {
-  /* Light Theme (default) */
-  :root {
-    --background: 240 5% 96%;
-    --foreground: 240 10% 4%;
-    --card: 240 5% 100%;
-    --card-foreground: 240 10% 4%;
-    --muted: 240 5% 90%;
-    --muted-foreground: 240 4% 46%;
-    /* Add your custom fonts here if needed, e.g. */
-    /* --font-sans: 'Inter', sans-serif; */
-  }
-
-  /* Dark Theme */
-  .dark {
-    --background: 240 10% 4%;
-    --foreground: 240 5% 96%;
-    --card: 240 6% 10%;
-    --card-foreground: 240 5% 96%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
-  }
-
-  /* 3. Apply base body styles */
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-}
-
-/* 4. Define custom utility styles or component styles in other layers */
-@layer utilities {
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-muted;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/50 rounded-lg;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/70;
-  }
-}
