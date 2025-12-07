@@ -1,4 +1,101 @@
-# 🚀 Neural Notes - Advanced Markdown Editor
+# 🚀 Modern Notes (modernnotes)
+
+A modern, full‑stack markdown note‑taking app with Google Sign‑In, JWT‑secured APIs, real‑time preview, math (KaTeX), syntax highlighting, and a polished dark/light theme.
+
+## Overview
+- Frontend: Next.js 15, React 19, Tailwind CSS 4, NextAuth, Turbopack.
+- Backend: Node.js, Express, MongoDB (Mongoose), JWT auth.
+- Auth: Google OAuth via NextAuth; API tokens (JWT) passed to the backend.
+- Notes: Create, read, update, delete notes with rich markdown preview and math/code support.
+
+## Features
+- Google login with secure session handling and JWT for API requests.
+- CRUD notes with instant feedback and toast notifications.
+- Live Markdown preview with GitHub Flavored Markdown (tables, checklists, etc.).
+- Math rendering via KaTeX and syntax highlighting for code blocks.
+- Responsive UI with dark/light/system theme toggle.
+
+## Project Structure
+```
+Notes/
+├── backend/        # Express API, MongoDB models, JWT middleware
+└── frontend/       # Next.js app, NextAuth, UI components
+```
+
+## Prerequisites
+- Node.js 18+ and npm
+- A MongoDB instance (local or cloud)
+- Google OAuth credentials (Client ID & Client Secret)
+
+## Environment Variables
+
+Create a `.env` file in `backend/`:
+```
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_long_random_secret
+```
+
+Create a `.env.local` in `frontend/`:
+```
+NEXT_PUBLIC_API_URL=http://localhost:5001/api
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXTAUTH_SECRET=your_long_random_secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+## Install & Run Locally
+
+Backend (API):
+```
+cd backend
+npm install
+npm run dev
+```
+The API runs at `http://localhost:5001`.
+
+Frontend (web app):
+```
+cd frontend
+npm install
+npm run dev
+```
+The app runs at `http://localhost:3000`.
+
+## API Reference
+
+All routes are prefixed with `/api`.
+
+- Auth
+  - `POST /api/auth/google` — Link/login a user by Google profile; returns JWT.
+
+- Notes (requires `Authorization: Bearer <JWT>`)
+  - `GET /api/notes` — List current user’s notes.
+  - `POST /api/notes` — Create a note (`{ title, content }`).
+  - `PUT /api/notes/:id` — Update a note (`{ title?, content? }`).
+  - `DELETE /api/notes/:id` — Delete a note.
+
+## How Auth Flows
+1. Frontend signs in with Google via NextAuth.
+2. On successful sign‑in, the frontend calls `POST /api/auth/google` on the backend to obtain a JWT.
+3. The JWT is stored in the session and sent as `Authorization: Bearer <token>` for all notes API requests.
+
+## Tech Stack
+- `frontend`: Next.js 15, React 19, Tailwind CSS 4, NextAuth, Prism/Highlight.js, KaTeX
+- `backend`: Express, Mongoose, JWT, CORS, dotenv
+
+## Notes
+- Ensure `NEXT_PUBLIC_API_URL` points to your backend base URL including `/api`.
+- If running on a different port or host, update `.env` files accordingly.
+- Dark/light theme is controlled via the theme toggle in the navbar.
+
+## Scripts
+- Backend: `npm run dev` (nodemon), `npm start` (node)
+- Frontend: `npm run dev` (turbopack), `npm run build`, `npm start`
+
+---
+Built with ❤️ for fast, beautiful note‑taking.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
