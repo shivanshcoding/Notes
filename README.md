@@ -1,4 +1,4 @@
-# 🚀 Modern Notes (modernnotes)
+# 🚀 Modern Notes
 
 A modern, full‑stack markdown note‑taking app with Google Sign‑In, JWT‑secured APIs, real‑time preview, math (KaTeX), syntax highlighting, and a polished dark/light theme.
 
